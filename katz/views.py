@@ -1,16 +1,58 @@
 from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import User
+from django.contrib.auth.models import User
+from datetime import date, datetime
+from venmo_api import Client
+import requests
+
+
 from django.contrib.auth import authenticate, login, logout
-from .models import CatTest
+from .models import CatTest, Transaction
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .models import Breeder
+
+# function to get venmo transactions and add any that are new to the db
+def updateVenmo():    #this is not a view but is used in the login_page view
+    access_token = Client.get_access_token(username='katz.breeder.system@gmail.com',
+                                           password='K@tz_098')
+    venmo = Client(access_token=access_token)
+    my_id = (venmo.user.get_my_profile().id)
+    transactions_list = venmo.user.get_user_transactions(user_id=my_id) # list of transactions from venmo
+
+    for transaction in transactions_list:
+        try:
+            type = transaction.note.split(" ")[0]
+        except IndexError:
+            type = ''
+        try:
+            catID = transaction.note.split(" ")[2]
+        except IndexError:
+            catID = ''
+
+        # Date is converted from timestamp to python datetime,date object
+        try:
+            formatted_date = date.fromtimestamp(transaction.date_completed)
+        except TypeError:
+            formatted_date = None
+        #Try to create a valid object using the transaction id given by venmo. This determines if the transaction is already in the database
+        try:
+            valid_transaction = Transaction.objects.get(id=transaction.id)
+            #If the transaction is not in the database already, create it
+        except (Transaction.DoesNotExist):
+            transaction = Transaction(id=transaction.id, cust_first_name=transaction.actor.first_name, cust_last_name=transaction.actor.last_name,
+                                      cust_venmo_name=transaction.actor.username, amount=transaction.amount, type=type,
+                                      catID=catID, date=formatted_date)
+            transaction.save()
+
+    #End the connection to venmo
+    venmo.log_out(access_token)
+
 # returns the http request for the main page: http://127.0.0.1:8000/
 @login_required
 def index(request):
     return render(request, "../templates/index.html")
+
 
 # returns the http request for the "available kittens" page: http://127.0.0.1:8000/kittens/
 @login_required
@@ -28,17 +70,12 @@ def register(request):
         name = request.POST['username']
         password = request.POST['password']
         email = request.POST['email']
-        role = request.POST['role']
 
 
         new_user = User.objects.create_user(name, email, password)
         new_user.first_name = firstname
         new_user.last_name = lastname
-        new_user.role = role
         new_user.save()
-
-
-
             #code for assigning the form data into the database fields.
         return redirect('login_page')
     return render(request, "../templates/register.html")
@@ -58,12 +95,13 @@ def login_page(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('index')
+                # Updates the database with any new Venmo transactions
+                updateVenmo()
+            return redirect('index')
+        #else:
 
-           # if user is not None:
-                #login(request, user)
-            #return redirect('index')
-
+            #messages.error(request, 'Invalid form submission.')
+            #return HttpResponse('Error, user does not exist')
         return render(request, "../templates/login_page.html")
 
 def logoutuser(request):
@@ -74,31 +112,27 @@ def logoutuser(request):
 
 def cat_register(request):
     if request.method == 'POST' and request.FILES['image']:
-        owner = request.user
         name = request.POST['catname']
         gender = request.POST['gender']
         color = request.POST['color']
+        bday = (request.POST['bday'])
+        print(type(bday), " is the type and " + bday + " is the string")
+        bday_date = datetime.strptime(bday, '%Y-%m-%d')
         personality = request.POST['personality']
-        mother = request.POST['mother']
-        father = request.POST['father']
         image = request.FILES['image']
         price = request.POST['price']
-        cattest = CatTest(name=name, gender=gender,
-                  personality=personality, color=color, mother=mother, father=father, image=image, price=price, owner=owner)
+        cattest = CatTest(name=name, birthday=bday_date, gender=gender,
+                  personality=personality, color=color, image=image, price=price)
         cattest.save()
         #this is supposed to retrieve the html form entries and assigns them to the CatTest variables in models.
-        return redirect('kittens', )
-    #cats = CatTest.objects.all()
+        return redirect('kittens')
+    return render(request, "../templates/cat_register.html")
+
+def query_test(request):
     females = CatTest.objects.filter(gender="Female")
-    males = CatTest.objects.filter(gender="Male")
-    #males = CatTest.objects.filter(gender="Male")
-    f = {'females':females}
-    m = f.update({'males':males})
-   # m = {'males':males}
-    return render(request, "../templates/cat_register.html", f, m )
+    test = "Test"
+    return render(request, "../templates/query_test.html", {'females':females}, {"test":test})
 
 def about(request):
     return render(request, "../templates/about.html")
-def query_test(request):
-    females = CatTest.objects.filter(gender="Female")
-    return render(request, "../templates/query_test.html" , {'females':females} )
+

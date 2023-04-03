@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-<meta charset="UTF-8">
-	 {% load static %}
- <title> Katz Registration Form </title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="register.css">
-<!--<script src=""></script>-->
-<!--{% load static %}  this loads the katz/images/ folder as the static folder (where all images are kept)-->
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <title> Katz Registration Form </title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="register.css">
+    <!--<script src=""></script>-->
+    <!--{% load static %}  this loads the katz/images/ folder as the static folder (where all images are kept)-->
 </head>
- <style>
+<style>
 
 body {
   background-color:#3792cb;
@@ -17,7 +17,7 @@ body {
 
 
 input[type=text], select, textarea {
-  width: 100%;
+  width: 150%;
   padding: 6px;
   border: 1px solid #ccc; /* Gray border */
   border-radius: 4px;
@@ -27,7 +27,7 @@ input[type=text], select, textarea {
 }
 
 input[type=email], select, textarea {
-  width: 100%;
+  width: 150%;
   padding: 6px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -120,60 +120,67 @@ function formValidation() {
 
 <body>
 <h1>Account Registration</h1>
- 
+
 <br>
- <div class="rightside">
-<h3><a href="{% url 'index' %}">Home</a></h3><br><br><br>
-<h3><a href="FAQ.html">More Help</a></h3><br><br><br>
-<h3><a href="{% url 'kittens' %}">Cats List</a></h3><br><br><br>
-<h3><a href="mailto:someone@some.some">Contact Us</a></h3><br><br><br>
+<div class="rightside">
+    <h3><a href="{% url 'index' %}">Home</a></h3><br><br><br>
+    <h3><a href="FAQ.html">More Help</a></h3><br><br><br>
+    <h3><a href="{% url 'kittens' %}">Cats List</a></h3><br><br><br>
+    <h3><a href="mailto:someone@some.some">Contact Us</a></h3><br><br><br>
 
 
 </div>
- <div class="container">
- <form name="register" action="" method="post" onsubmit ="return formValidation()" >{% csrf_token %}
-  
-  <label for="fname" class="form-label">First name:<br></label> 
-	<input type="text" id="fname" name="firstname" required><br>
-	
-	 <label for="lname" class="form-label">Last name:<br></label> 
-	<input type="text" id="lname" name="lastname" required><br>
-  
-  <label for="addr" class="form-label">Address:<br></label>
-	<input type="text" id="addr" name="address" required><br>
+<div class="container">
+    <form name="register" action="" method="post" onsubmit ="return formValidation()" >{% csrf_token %}
 
-  <!--<label for="uphone" class="form-label">Phone Number:<br></label>
-	<input type="text" id="uphone" name="phone" placeholder="###-###-####" required><br>
+        <label for="fname" class="form-label">First name:<br></label>
+        <input type="text" id="fname" name="firstname" required><br>
 
-     <label for="birth" class="form-label">Date of Birth:<br></label>
-     <input type="text" id="birth" name="dob" placeholder="YYYY-MM-DD" required><br>-->
+        <label for="lname" class="form-label">Last name:<br></label>
+        <input type="text" id="lname" name="lastname" required><br>
 
-  <label for="user_email" class="form-label"> Email Address: <br></label>
-	<input type="email" id="user_email" name="email" required><br>
+        <label for="addr" class="form-label">Address:<br></label>
+        <input type="text" id="addr" name="address" required><br>
 
-     <label for="name">Role:</label>
-     <select name="role">
-         <option value="breeder">Breeder</option>
-         <option value="customer">Customer</option>
-     </select>
+        <!--<label for="uphone" class="form-label">Phone Number:<br></label>
+          <input type="text" id="uphone" name="phone" placeholder="###-###-####" required><br>
+           <label for="birth" class="form-label">Date of Birth:<br></label>
+           <input type="text" id="birth" name="dob" placeholder="YYYY-MM-DD" required><br>-->
 
-<label for="name" class="form-label"> Username: <br></label>
-	<input type="text" id="name" name="username" required><br>
-	
-	<label for="pw" class="form-label"> Password: <br></label> 
-	<input type="password" id="pw" name="password" required><br>
-	
-	<label for="pwconfirm" class="form-label"> Confirm Password: <br></label> 
-	<input type="password" id="pwconfirm" name="pwconfirm" required><br><br><br>
-	
-     <input type= "submit" value="Submit">
+        <label for="user_email" class="form-label"> Email Address: <br></label>
+        <input type="email" id="user_email" name="email" required><br>
+
+        <label for="name" class="form-label"> Username: <br></label>
+        <input type="text" id="name" name="username" required><br>
+
+        <label for="pw" class="form-label"> Password: <br></label>
+        <input type="password" id="pw" name="password" required><br>
+
+        <label for="pwconfirm" class="form-label"> Confirm Password: <br></label>
+        <input type="password" id="pwconfirm" name="pwconfirm" required><br><br><br>
+
+        <input type= "submit" value="Submit">
 
 
- 
- </form>
- </div>
+
+    </form>
+</div>
 
 
 
 </body>
 </html>
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

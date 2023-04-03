@@ -12,14 +12,14 @@ from . import views
 # The view name is the name of the matching method from the views.py file.
 urlpatterns = [
     path ('admin/', admin.site.urls),
-    path('index', views.index, name='index'),
+    path('', views.index, name='index'),
     path('kittens/', views.kittens, name='kittens'),
     path('register/', views.register, name='register'),
     path('about/', views.about, name='about'),
-    path('', views.login_page, name='login_page'),
+    path('login_page/', views.login_page, name='login_page'),
     path('cat_register/', views.cat_register, name='cat_register'),
-    path('query_test/', views.query_test, name='query_test'),
     path('logout/', logoutuser, name='logout'),
+    path('query_test/', views.query_test, name='query_test'),
 
 
 

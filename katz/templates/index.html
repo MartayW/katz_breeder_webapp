@@ -4,15 +4,13 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name= "Author" content="Martay Williams">
- <script>
-
-
- </script>
+ <link rel="stylesheet" href="index.css">
+ <script defer src="login-page.js"></script>
 
      <!--Load the static variable that refers to the images folder-->
      {% load static %}
-
-
+ 
+ 
  <title> Katz Home Page </title>
  </head>
  <style>
@@ -27,7 +25,7 @@
 	padding: 20px 20px;
 	box-sizing: border-box;
 	border-radius: 20px;
-
+	
 }
 
 h1 {
@@ -61,7 +59,7 @@ background-color:#3792cb;
 padding-top:15px;
 	padding-bottom:15px;
 	border-radius: 20px;
-
+  
 }
 
 th {
@@ -76,7 +74,7 @@ th {
 	margin-right: auto;
 	margin-left: auto;
 	border: 1px solid #ccc;
-  border-radius: 15px;
+  border-radius: 15px; 
   box-sizing: border-box;
   letter-spacing: 3px;
 }
@@ -91,20 +89,20 @@ th {
 	padding-right: 30px;
 	padding-top:15px;
 	padding-bottom:15px;
-
+	
 }
 img {
   border:15px solid #d8f9ff;
-  border-radius: 55px;
+  border-radius: 55px; 
 }
  </style>
  <body>
  <div class="top">
  <h1>KATZ</h1>
  </div>
- {% if user.role == 'breeder' %}
+
  <div class="topRight">
-     <h2>Hello {{request.user.username}} <br> You Are a {{request.user.role}} </h2>
+     <h2>Hello {{request.user.username}}</h2>
  </div>
 		 <div class="banner">
 		 <table>
@@ -118,61 +116,26 @@ img {
 		 </div>
 		 <br><br><br><br>
 
- <!-- single cat version
+ <!-- single cat version 
  <div class="main_cat_image"><a href="kittens.html">
  <img src="/Users/19109/katz_project\katz_breeder_webapp\katz/images/willy1.jpg" alt="Willy" height="300" width="400"/>
  </a>
  -->
-
+ 
 <!-- 3 cat version (experimental)-->
 <div class="left_cat_image"><a href="{% url 'kittens' %}">
     <img src="{% static 'merlin1.jpg' %}" id="catimage" alt="My image" height="300" width="400">
  </a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-
-
+	
+ 
 <a href="{% url 'kittens' %}">
     <img src="{% static 'willy1.jpg' %}" alt="My image" height="300" width="400">
  </a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-
+ 
 <a href="{% url 'kittens' %}">
     <img src="{% static 'solei1.jpg' %}" alt="My image" height="300" width="400">
  </a>
  </div>
- {% else %}
- <div class="topRight">
-     <h2>Hello {{request.user.username}}<br> You Are a {{request.user.role}}</h2>
- </div>
- <div class="banner">
-     <table>
-         <tr>
-             <th><a class="collapse-item" href="{% url 'about' %}">About Us</a></th>
-             <th><a class="collapse-item" href="{% url 'kittens' %}">Available Kittens</a></th>
-             <th><strong><a class="collapse-item" href="{% url 'logout' %}">Logout</a></strong></th>
-         </tr>
-     </table>
- </div>
- <br><br><br><br>
-
- <!-- single cat version
- <div class="main_cat_image"><a href="kittens.html">
- <img src="/Users/19109/katz_project\katz_breeder_webapp\katz/images/willy1.jpg" alt="Willy" height="300" width="400"/>
- </a>
- -->
-
- <!-- 3 cat version (experimental)-->
- <div class="left_cat_image"><a href="{% url 'kittens' %}">
-     <img src="{% static 'merlin1.jpg' %}" id="catimage" alt="My image" height="300" width="400">
- </a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-
-
-     <a href="{% url 'kittens' %}">
-         <img src="{% static 'willy1.jpg' %}" alt="My image" height="300" width="400">
-     </a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-
-     <a href="{% url 'kittens' %}">
-         <img src="{% static 'solei1.jpg' %}" alt="My image" height="300" width="400">
-     </a>
- </div>
- {% endif %}
+ 
  </body>
  </html>

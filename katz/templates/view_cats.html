@@ -139,7 +139,28 @@ padding: 10px;
 </div>
 
 <ul>
+    {% for cats in cats %}
+    <li class="items-list">
 
+        <a href=""><img src="{% static 'willy1.jpg' %}" alt="icon" width="200" height="auto" /></a>
+
+        <div class="righttxt">
+            <div class="nametext">
+                <h1>{{cats.name}}</h1>
+            </div>
+            <div class="pricetext">
+                <h2>$50</h2>
+            </div>
+            <div class="infotext">
+                <h3>[Cat Info]</h3>
+            </div>
+            <br>
+            <button onclick="" class="button">
+                Purchase
+            </button>
+            {% endfor %}
+        </div>
+    </li>
 
 </ul>
 

@@ -1,14 +1,14 @@
 <!Doctype html>
 <html lang="en">
- <head>
+<head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width,initial-scale=1">
  <meta name= "Author" content="Martay Williams">
  <link rel="stylesheet" href="login_page.css">
  <script defer src="login-page.js"></script>
-  <div class="container">
-   {% include 'messages.html' %}
-  </div>
+ <div class="container">
+  {% include 'messages.html' %}
+ </div>
 
  <title> Login Page </title>
  <style>
@@ -100,28 +100,42 @@ h2 {
 }
 
  </style>
- </head>
- <body>
- <h1>LOGIN</h1>
- 
- <div class="login">
- 
+</head>
+<body>
+<h1>LOGIN</h1>
+
+<div class="login">
+
  <form name="login" action="" method="post">{% csrf_token %}
- <label for="uname">Username:<br></label> 
-	<input type="text" id="uname" name="uname" required><br>
-	
-	 <label for="pass">Password:<br></label>
-		<input type="password" id="pass" name="pw" required><br><br>
- 
- <input type= "submit" value="Submit"> 
- 
+  <label for="uname">Username:<br></label>
+  <input type="text" id="uname" name="uname" required><br>
+
+  <label for="pass">Password:<br></label>
+  <input type="password" id="pass" name="pw" required><br><br>
+
+  <input type= "submit" value="Submit">
+
  </form>
- </div>
- <h2><a class="collapse-item" href="{% url 'register' %}">Create Account</a></h2>
- 
- 
- 
- 
- 
- </body>
- </html>
+</div>
+<h2><a class="collapse-item" href="{% url 'register' %}">Create Account</a></h2>
+
+
+
+
+
+</body>
+</html>
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

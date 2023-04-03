@@ -124,102 +124,9 @@ padding: 10px;
 .button:hover {
   background-color: #ff6242;
 }
-<!-- -->
-.button2{
-	background-color: #20124d;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 7px;
-  cursor: pointer;
-  font-family: georgia;
-  font-weight: 900;
-  position: relative;
-
-}
-.button2c{
-	background-color: #20124d;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 7px;
-  cursor: pointer;
-  font-family: georgia;
-  font-weight: 900;
-  position: relative;
-  top: -32px;
-  right: -600px;
-}
-
-.button2:hover {
-  background-color: #916fff;
-}
-
-.button2c:hover {
-  background-color: #916fff;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.7);
-  transition: opacity 500ms;
-  visibility: hidden;
-  opacity: 0;
-}
-.overlay:target {
-  visibility: visible;
-  opacity: 1;
-}
-
-.popup {
-  margin: 70px auto;
-  padding: 20px;
-  background: #fff;
-  border-radius: 5px;
-  width: 30%;
-  position: relative;
-  transition: all 5s ease-in-out;
-}
-
-.popup h2 {
-  margin-top: 0;
-  color: #333;
-  font-family: Tahoma, Arial, sans-serif;
-}
-.popup .close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  transition: all 200ms;
-  font-size: 30px;
-  font-weight: bold;
-  text-decoration: none;
-  color: #333;
-}
-.popup .close:hover {
-  color: #06D85F;
-}
-.popup .content {
-  max-height: 30%;
-  overflow: auto;
-}
-
-@media screen and (max-width: 700px){
-  .box{
-    width: 70%;
-  }
-  .popup{
-    width: 70%;
-  }
-}
 </style>
 <body>
 <h1>Avaliable Cats</h1>
-{% if user.role == 'breeder' %}
 <div class="banner">
     <table>
         <tr>
@@ -242,89 +149,47 @@ padding: 10px;
                 <h2>$50</h2>
             </div>
             <div class="infotext">
-                <h3>Male, White, Hyper <br> Uploaded By Default</h3>
-
+                <h3>Male, White, Hyper</h3>
             </div>
-
+            <br>
+            <button onclick="" class="button">
+                Purchase
+            </button>
         </div>
     </li>
-    {% for cats in cats %}
-    <!-- this a FOR loop that automatically goes through all the cats in the CatTest table in the database
-    I basically set it up so that we have a working template for any newly registered cat-->
     <li class="items-list">
-
-        <img src="{{cats.image.url}}" alt="{{cats.name}}" width="200" height="auto" />
-        <!-- the {{cats.image.url is supposed to render the image from the database. Don't know why it's not-->
-
+        <a href=""><img src="{% static 'solei1.jpg' %}" alt="icon" width="200" height="auto" /></a>
 
         <div class="righttxt">
             <div class="nametext">
-                <h1>{{cats.name}}</h1>
-            </div>
-            <div class="pricetext">
-                <h2>{{cats.price}}</h2>
-            </div>
-            <div class="infotext">
-                <h3>{{cats.gender}}, {{cats.color}}, {{cats.personality}}
-                    <br> Uploaded By {{cats.owner}}</h3>
-
-                <div class="box">
-                    <a class="button2" href="#{{cats.id}}">Pedigree</a>
-                </div>
-
-                <div id="{{cats.id}}" class="overlay">
-                    <div class="popup">
-                        <a class="close" href="#">&times;</a>
-                        <div class="content">
-                            <br>
-                            <div style = "Text-align:center" >
-                                <u><b>Parents</b></u>
-                                <br>
-                            </div>
-                            <div style = "Text-align:left;float:left;position:absolute;left:100px" >
-                                <b>Father:</b> {{cats.father}}
-                            </div>
-                            <div style = "Text-align:right;float:right;position:absolute;right:100px" >
-                                <b>Mother:</b> {{cats.mother}}
-                            </div>
-                            <br>
-                            <hr size="8" width="90%" color="red">
-                            <div style = "Text-align:center" >
-                                <u><b>{{cats.name}}</b></u> </div>
-                            <br>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-    </li>
-
-
-</ul>
-{% else %}
-<div class="banner">
-    <table>
-        <tr>
-            <th><a class="collapse-item" href="{% url 'index' %}">Home</a></th>
-
-
-        </tr>
-    </table>
-</div>
-
-<ul>
-    <li class="items-list">
-        <a href=""><img src="{% static 'willy1.jpg' %}" alt="icon" width="200" height="auto" /></a>
-
-        <div class="righttxt">
-            <div class="nametext">
-                <h1>WILLY</h1>
+                <h1>SOLEI</h1>
             </div>
             <div class="pricetext">
                 <h2>$50</h2>
             </div>
             <div class="infotext">
-                <h3>Male, White, Hyper</h3>
+                <h3>Female, White Mysterious</h3>
+            </div>
+            <br>
+            <button onclick="" class="button">
+                Purchase
+            </button>
+        </div>
+    </li>
+
+    <li class="items-list">
+        <a href=""><img src="{% static 'merlin1.jpg' %}" alt="icon" width="200" height="auto" /></a>
+
+        <div class="righttxt">
+            <div class="nametext">
+                <h1>MERLIN</h1>
+            </div>
+            <div class="pricetext">
+                <h2>$50</h2>
+            </div>
+            <div class="infotext">
+                <h3>Male, Orange, Playful</h3>
+
 
             </div>
             <br>
@@ -350,48 +215,20 @@ padding: 10px;
                 <h2>{{cats.price}}</h2>
             </div>
             <div class="infotext">
-                <h3>{{cats.gender}}, {{cats.color}}, {{cats.personality}}
-                    <br> Uploaded By {{cats.owner}}</h3>
-
+                <h3>{{cats.gender}}, {{cats.color}}, {{cats.personality}}, {{cats.birthday}}, {{cats.age}}</h3>
             </div>
             <br>
             <button onclick="" class="button">
                 Purchase
             </button>
-            <div class="box">
-                <a class="button2c" href="#{{cats.id}}">Pedigree</a>
-            </div>
-
-            <div id="{{cats.id}}" class="overlay">
-                <div class="popup">
-                    <a class="close" href="#">&times;</a>
-                    <div class="content">
-                        <br>
-                        <div style = "Text-align:center" >
-                            <u><b>Parents</b></u>
-                            <br>
-                        </div>
-                        <div style = "Text-align:left;float:left;position:absolute;left:100px" >
-                            <b>Father:</b> {{cats.father}}
-                        </div>
-                        <div style = "Text-align:right;float:right;position:absolute;right:100px" >
-                            <b>Mother:</b> {{cats.mother}}
-                        </div>
-                        <br>
-                        <hr size="8" width="90%" color="red">
-                        <div style = "Text-align:center" >
-                            <u><b>{{cats.name}}</b></u> </div>
-                        <br>
-                    </div>
-                </div>
-            </div>
             {% endfor %}
         </div>
     </li>
 
 
 </ul>
-{% endif %}
+
+
 <!--<table>
     <tr>
         <td>text above pic1</td>
