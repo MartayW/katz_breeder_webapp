@@ -121,8 +121,9 @@ def cat_register(request):
         personality = request.POST['personality']
         image = request.FILES['image']
         price = request.POST['price']
+        breeder = 0
         cattest = CatTest(name=name, birthday=bday_date, gender=gender,
-                  personality=personality, color=color, image=image, price=price)
+                  personality=personality, color=color, image=image, price=price, breeder=breeder)
         cattest.save()
         #this is supposed to retrieve the html form entries and assigns them to the CatTest variables in models.
         return redirect('kittens')

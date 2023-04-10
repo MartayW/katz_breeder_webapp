@@ -70,6 +70,7 @@ class Transaction(models.Model):
 
 class CatTest(models.Model):
     name = models.CharField(max_length=15, default = "", primary_key=True)
+    breeder = models.ForeignKey(Breeder, on_delete=models.CASCADE, default=0)
     gender = models.CharField(max_length=15, null=True, blank=True)
     color = models.CharField(max_length=15, null=True, blank=True)
     personality = models.CharField(max_length=15, null=True, blank=True)
